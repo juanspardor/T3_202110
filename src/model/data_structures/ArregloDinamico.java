@@ -43,14 +43,14 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 		{  // caso de arreglo lleno (aumentar tamaNo)
 			tamanoMax = 2 * tamanoMax;
 			T[ ] copia = elementos;
-			elementos = (T[]) new Object[tamanoMax];
+			elementos = (T[]) new Comparable[tamanoMax];
 			for ( int i = 0; i < tamanoAct; i++)
 			{
 				elementos[i] = copia[i];
 			} 
 
 		}
-		elementos[tamanoAct++] = dato;
+		elementos[tamanoAct] = dato;
 		tamanoAct++;
 
 	}	

@@ -43,11 +43,11 @@ public class Controller {
 				Cronometro cronometroTimer1= new Cronometro();
 				modelo = new Modelo(1); 
 				view.printMessage("Informacion basica del primer video:");
-				view.printMessage("Titulo:"+ modelo.getFirst().darTitulo() +"canal"+modelo.getFirst().darCanal());
+				view.printMessage("Titulo: "+ modelo.getFirst().darTitulo() +". Canal: "+modelo.getFirst().darCanal());
 				view.printMessage("Informacion basica del ultimo video:");
-				view.printMessage("Titulo:"+modelo.getLast().darTitulo()+ "canal"+modelo.getLast().darCanal());
-				view.printMessage("Cantidad total de videos encotrados:"+ modelo.darTamano());
-				view.printMessage("Tiempo que tomo el proceso de carga en segundos:"+cronometroTimer1.elapsedTime());
+				view.printMessage("Titulo: "+modelo.getLast().darTitulo()+ ". Canal: "+modelo.getLast().darCanal());
+				view.printMessage("Cantidad total de videos encotrados: "+ modelo.darTamano());
+				view.printMessage("Tiempo que tomo el proceso de carga en segundos: "+cronometroTimer1.elapsedTime());
 
 				break;
 
@@ -56,11 +56,11 @@ public class Controller {
 				Cronometro cronometroTimer2= new Cronometro();
 				modelo = new Modelo(2); 
 				view.printMessage("Informacion basica del primer video:");
-				view.printMessage("Titulo:"+ modelo.getFirst().darTitulo() +"canal"+modelo.getFirst().darCanal());
+				view.printMessage("Titulo: "+ modelo.getFirst().darTitulo() +". Canal: "+modelo.getFirst().darCanal());
 				view.printMessage("Informacion basica del ultimo video:");
-				view.printMessage("Titulo:"+modelo.getLast().darTitulo()+ "canal"+modelo.getLast().darCanal());
-				view.printMessage("Cantidad total de videos encotrados:"+ modelo.darTamano());
-				view.printMessage("Tiempo que tomo el proceso de carga en segundos:"+cronometroTimer2.elapsedTime());
+				view.printMessage("Titulo: "+modelo.getLast().darTitulo()+ ". Canal: "+modelo.getLast().darCanal());
+				view.printMessage("Cantidad total de videos encotrados: "+ modelo.darTamano());
+				view.printMessage("Tiempo que tomo el proceso de carga en segundos: "+cronometroTimer2.elapsedTime());
 
 
 
@@ -68,7 +68,7 @@ public class Controller {
 
 
 			case 3: 
-				view.printMessage("--------- \n Hasta pronto !! \n---------"); 
+				view.printMessage("-------------------- \n Hasta pronto !! \n--------------------"); 
 				lector.close();
 				fin = true;
 				break;	

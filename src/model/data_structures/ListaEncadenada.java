@@ -54,7 +54,7 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		NodoListaEncadenada<T> actual=first;
 		NodoListaEncadenada<T> momentario= null;
 		
-		if(posicion<=size())
+		if(posicion<=size() && posicion>0)
 		{
 			int i=1;
 			while(i<posicion-1)
@@ -110,7 +110,7 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		NodoListaEncadenada<T> actual=first;
 		NodoListaEncadenada<T> anterior=null;
 		
-		if(posicion<=size())
+		if(posicion<=size()&&posicion>0)
 		{
 			int i=1;
 			while(i<posicion)
@@ -212,59 +212,48 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 	}
 
 	
-	public void exchange(int pos1, int pos2) 
+	public void exchange(int pos1, int pos2)
 	{
-		NodoListaEncadenada<T> primero = null;
-		NodoListaEncadenada<T> segundo = null;
-		NodoListaEncadenada<T> actual1 = first;
-		NodoListaEncadenada<T> anterior1 = null;
-		NodoListaEncadenada<T> actual2 = null;
-		NodoListaEncadenada<T> anterior2 = null;
-
-
-		if(pos1<=size() && pos2<=size())
+		if(pos1>size() || pos1<1 || pos2>size() || pos2<1 || pos1==pos2)
 		{
-			if(pos1<pos2)
-			{
-				int i=1;
-				while(i<pos1)
-				{
-					anterior1=actual1;
-					actual1=actual1.getNext();
-					i++;
-				}
-				int j=pos1;
-				while(j<pos2)
-				{
-					anterior2=actual2;
-					actual2=actual2.getNext();
-					i++;
-				}
 
-
-			}
-			else
-			{
-				int f =1;
-				while(f<pos2)
-				{
-					anterior1=actual1;
-					actual1=actual1.getNext();
-					f++;
-				}
-				int d=pos2;
-				while(d<pos1)
-				{
-					anterior2=actual2;
-					actual2=actual2.getNext();
-					d++;
-				}
-
-			}
-			anterior1.setNext(actual2);
-			anterior2.setNext(actual1);
 		}
+		else if(pos1-pos2==1)
+		{
+			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getElement(pos2-1);
+			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getElement(pos1+1);
+			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getElement(pos1);
+			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getElement(pos2);
+			anterior2.setNext(actual1);
+			actual1.setNext(actual2);
+			actual2.setNext(siguiente1);
 
+		}
+		else if(pos1-pos2==-1)
+		{
+			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getElement(pos1-1);
+			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getElement(pos2+1);
+			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getElement(pos1);
+			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getElement(pos2);
+			anterior1.setNext(actual2);
+			actual2.setNext(actual1);
+			actual1.setNext(siguiente2);
+		}
+		else
+		{
+			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getElement(pos1-1);
+			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getElement(pos1+1);
+			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getElement(pos2-1);
+			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getElement(pos2+1);
+			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getElement(pos1);
+			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getElement(pos2);
+
+			anterior1.setNext(actual2);
+			actual2.setNext(siguiente1);
+
+			anterior2.setNext(actual1);
+			actual1.setNext(siguiente2);
+		}
 	}
 
 	@Override
@@ -272,7 +261,7 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 	{
 		NodoListaEncadenada<T> actual = first;
 
-		if (pos<size())
+		if (pos<size() && pos>0)
 		{
 			int i=1;
 			while(i<pos)

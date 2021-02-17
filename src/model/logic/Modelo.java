@@ -115,16 +115,16 @@ public class Modelo
 				String titulo = record.get("title");
 				String canal = record.get("channel_title");
 				String categoria = record.get("category_id");
-				String publicacion = record.get("publis_time");
-				String vistas = record.get("views");
+				String publicacion = record.get("publish_time");
 				String tageados = record.get("tags");
+				String vistas = record.get("views");
 				String likes =record.get("likes");
 				String dislikes = record.get("dislikes");
 				String comentarios = ("comment_count");
-				String url = record.get("thumnbnail_link");
+				String url = record.get("thumbnail_link");
 				String comentariosEnabled = record.get("comments_disabled");
 				String ratingsEnabled = record.get("ratings_disabled");
-				String erorPosible = record.get("video_error");
+				String erorPosible = record.get("video_error_or_removed");
 				String descrip = record.get("description");
 				String pais = record.get("country");
 
@@ -132,6 +132,7 @@ public class Modelo
 				datos.addLast(nuevo); 
 			}
 		}
+		catch(Exception e) {System.out.println("algo");}
 		finally
 		{
 			lector.close();
