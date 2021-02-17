@@ -6,25 +6,25 @@ public class YoutubeVideo implements Comparable<YoutubeVideo>
 {
 	private String id;
 	
-	private Date trending;
+	private String trending;
 	
 	private String title;
 	
 	private String channel;
 
-	private int categoria;
+	private String categoria;
 	
-	private Date published;
+	private String published;
 	
 	private String tags;
 	
-	private Long views;
+	private String views;
 	
-	private Long likes;
+	private String likes;
 	
-	private Long dislikes;
+	private String dislikes;
 	
-	private Long comments;
+	private String comments;
 	
 	private String link;
 	
@@ -39,7 +39,7 @@ public class YoutubeVideo implements Comparable<YoutubeVideo>
 	private String pais;
 	
 	
-	public YoutubeVideo(String pId, Date pTrending, String pTitle, String pChannel, int pCategoria, Date pPublished, String pTags, Long pViews, Long pLikes, Long pDislikes, Long pComments, String pLink, String pComEnabled, String pRatEnabled, String pErrorRemoved, String pDescription, String pPais)
+	public YoutubeVideo(String pId, String pTrending, String pTitle, String pChannel, String pCategoria, String pPublished, String pTags, String pViews, String pLikes, String pDislikes, String pComments, String pLink, String pComEnabled, String pRatEnabled, String pErrorRemoved, String pDescription, String pPais)
 	{
 		id = pId;
 		trending = pTrending;
@@ -62,14 +62,14 @@ public class YoutubeVideo implements Comparable<YoutubeVideo>
 	}
 	
 	
-	public Date darTrending()
+	public String darTrending()
 	{
 		return trending;
 	}
 	
 	public int compareTo(YoutubeVideo otro)
 	{
-		return trending.compareTo(otro.darTrending());
+		return 0;
 	}
 	public String darTitulo()
 	{

@@ -111,23 +111,16 @@ public class Modelo
 			{
 				
 				String id = record.get("video_id");
-				System.out.println(1);
-				
-				String trendingString = record.get("trending_date");
-				Date fechaTrending = new SimpleDateFormat("yy:dd:mm").parse(trendingString);				
+				String fechaTrending = record.get("trending_date");		
 				String titulo = record.get("title");
 				String canal = record.get("channel_title");
-				int categoria = Integer.parseInt(record.get("category_id"));
-				String publishString = record.get("publis_time");
-				String[] fechas = publishString.split("T");
-				String[] horas = fechas[1].split(".");
-				String finalPublish = fechas[1]+" "+horas[0];
-				Date publicacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(finalPublish);
-				Long vistas = Long.parseLong(record.get("views"));
+				String categoria = record.get("category_id");
+				String publicacion = record.get("publis_time");
+				String vistas = record.get("views");
 				String tageados = record.get("tags");
-				Long likes = Long.parseLong(record.get("likes"));
-				Long dislikes = Long.parseLong(record.get("dislikes"));
-				Long comentarios = Long.parseLong(record.get("comment_count"));
+				String likes =record.get("likes");
+				String dislikes = record.get("dislikes");
+				String comentarios = ("comment_count");
 				String url = record.get("thumnbnail_link");
 				String comentariosEnabled = record.get("comments_disabled");
 				String ratingsEnabled = record.get("ratings_disabled");
