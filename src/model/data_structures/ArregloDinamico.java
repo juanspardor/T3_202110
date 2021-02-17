@@ -399,6 +399,31 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 		}
 
 	}
+	
+	public ILista<T> sublista(int numElementos)
+	{
+		if(numElementos<1)
+		{
+			System.out.println("El numero no puede ser negativo");
+			return null;
+		}
+		else
+		{
+			ArregloDinamico<T> resp = new ArregloDinamico<T>(numElementos);
+			if(numElementos>=tamanoAct)
+			{
+				resp = this;
+			}
+			else
+			{
+				for(int i = numElementos-1; i<tamanoAct;i++)
+				{
+					resp.deleteElement(i);
+				}
+			}
+			return resp;
+		}
+	}
 
 
 

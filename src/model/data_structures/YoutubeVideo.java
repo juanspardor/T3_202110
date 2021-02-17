@@ -1,6 +1,9 @@
 package model.data_structures;
 
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
+
 
 public class YoutubeVideo implements Comparable<YoutubeVideo>
 {
@@ -61,6 +64,10 @@ public class YoutubeVideo implements Comparable<YoutubeVideo>
 		
 	}
 	
+	public String darLikes()
+	{
+		return likes;
+	}
 	
 	public String darTrending()
 	{
@@ -69,8 +76,32 @@ public class YoutubeVideo implements Comparable<YoutubeVideo>
 	
 	public int compareTo(YoutubeVideo otro)
 	{
-		return 0;
+		int rta = 0;
+		try
+		{
+			Date fechaEste = new SimpleDateFormat("yy.dd.MM").parse(trending);
+			Date fechaOtro = new SimpleDateFormat("yy.dd.MM").parse(otro.darTrending());
+			rta = fechaEste.compareTo(fechaOtro);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+
+		return rta;
 	}
+	
+	public static class ComparadorXLikes implements Comparator<YoutubeVideo>
+	{
+		public int compare(YoutubeVideo video1, YoutubeVideo video2)
+		{
+			int likes1 = Integer.parseInt(video1.darLikes());
+			int likes2 = Integer.parseInt(video2.darLikes());
+			return likes1-likes2;
+		}
+	}
+	
+	
 	public String darTitulo()
 	{
 		return title;

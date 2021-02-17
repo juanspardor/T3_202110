@@ -275,6 +275,29 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		}
 
 	}
+	
+	public ILista<T> sublista(int numElementos)
+	{
+		if(numElementos<1)
+		{
+			System.out.println("El numero no puede ser menor que 1");
+			return null;
+		}
+		else
+		{
+			ListaEncadenada<T> resp = new ListaEncadenada(first);
+			if(numElementos>=size())
+			{
+				resp = this;
+			}
+			else
+			{
+				((NodoListaEncadenada<T>) resp.getElement(numElementos)).setNext(null);
+			}
+			return resp;
+		}
+		
+	}
 
 
 }

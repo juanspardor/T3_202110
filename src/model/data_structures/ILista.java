@@ -92,5 +92,11 @@ public interface ILista<T extends Comparable<T>>
 	 */
 	public void changeInfo(int pos, T elemento);
 	
+	/**
+	 * 
+	 * @param numElementos
+	 * @return
+	 */
+	public ILista<T> sublista(int numElementos);
 
 }
