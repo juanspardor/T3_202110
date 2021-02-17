@@ -111,7 +111,7 @@ public class Modelo
 			{
 				
 				String id = record.get("video_id");
-			
+				System.out.println(1);
 				
 				String trendingString = record.get("trending_date");
 				Date fechaTrending = new SimpleDateFormat("yy:dd:mm").parse(trendingString);				
