@@ -74,7 +74,10 @@ public class Modelo
 		return datos.lastElement();
 	}
 	
-	
+	public YoutubeVideo getElement(int pos)
+	{
+		return datos.getElement(pos);
+	}
 	
 	/**
 	 * Servicio de consulta de numero de elementos presentes en el modelo 
@@ -95,10 +98,6 @@ public class Modelo
 	}
 
 	
-
-
-
-
 	public void cargarDatos() throws Exception
 	{
 		final Reader lector = new InputStreamReader (new FileInputStream(new File("./data/videos-small.csv")),"UTF-8");
