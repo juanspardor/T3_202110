@@ -1,7 +1,9 @@
 package controller;
 
+import java.util.Comparator;
 import java.util.Scanner;
 
+import model.data_structures.YoutubeVideo;
 import model.logic.Cronometro;
 import model.logic.Modelo;
 import view.View;
