@@ -416,10 +416,38 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 			}
 			else
 			{
-				for(int i = numElementos-1; i<tamanoAct;i++)
+				for(int i = 0; i<numElementos;i++)
 				{
-					resp.deleteElement(i);
+					resp.addLast(elementos[i]);;
 				}
+			}
+			return resp;
+		}
+	}
+	
+	
+
+
+
+	@Override
+	public ILista<T> subList(int posi, int numElementos) 
+	{
+		if(numElementos <1 || posi<1)
+		{
+			System.out.println("Uno de los parametros esta mal");
+			return null;
+		}
+		else
+		{
+			ArregloDinamico<T> resp = new ArregloDinamico<T>(numElementos);
+			int hastaDonde=numElementos;
+			if(numElementos>tamanoAct-posi)
+			{
+				hastaDonde = tamanoAct;
+			}
+			for(int i = posi-1;i<hastaDonde;i++)
+			{
+				resp.addLast(elementos[i]);
 			}
 			return resp;
 		}

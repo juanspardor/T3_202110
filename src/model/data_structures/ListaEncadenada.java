@@ -165,6 +165,24 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		else
 			return null;
 	}
+	
+	public NodoListaEncadenada<T> getNodo(int pos)
+	{
+		NodoListaEncadenada<T> actual=first;
+		if(pos<=size()&& pos>0)
+		{
+			int i=1;
+			while(i<pos)
+			{
+				actual=actual.getNext();
+				i++;
+			}
+
+			return actual;
+		}
+		else
+			return null;
+	}
 
 	@Override
 	public int size() 
@@ -220,10 +238,10 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		}
 		else if(pos1-pos2==1)
 		{
-			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getElement(pos2-1);
-			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getElement(pos1+1);
-			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getElement(pos1);
-			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getElement(pos2);
+			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getNodo(pos2-1);
+			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getNodo(pos1+1);
+			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getNodo(pos1);
+			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getNodo(pos2);
 			anterior2.setNext(actual1);
 			actual1.setNext(actual2);
 			actual2.setNext(siguiente1);
@@ -231,22 +249,22 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		}
 		else if(pos1-pos2==-1)
 		{
-			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getElement(pos1-1);
-			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getElement(pos2+1);
-			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getElement(pos1);
-			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getElement(pos2);
+			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getNodo(pos1-1);
+			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getNodo(pos2+1);
+			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getNodo(pos1);
+			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getNodo(pos2);
 			anterior1.setNext(actual2);
 			actual2.setNext(actual1);
 			actual1.setNext(siguiente2);
 		}
 		else
 		{
-			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getElement(pos1-1);
-			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getElement(pos1+1);
-			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getElement(pos2-1);
-			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getElement(pos2+1);
-			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getElement(pos1);
-			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getElement(pos2);
+			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getNodo(pos1-1);
+			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getNodo(pos1+1);
+			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getNodo(pos2-1);
+			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getNodo(pos2+1);
+			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getNodo(pos1);
+			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getNodo(pos2);
 
 			anterior1.setNext(actual2);
 			actual2.setNext(siguiente1);
@@ -285,18 +303,38 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		}
 		else
 		{
-			ListaEncadenada<T> resp = new ListaEncadenada(first);
-			if(numElementos>=size())
+			ListaEncadenada<T> resp = new ListaEncadenada<T>(first);
+			int hastaDonde = numElementos;
+			if(numElementos>size())
 			{
-				resp = this;
+				hastaDonde = size();
 			}
-			else
-			{
-				((NodoListaEncadenada<T>) resp.getElement(numElementos)).setNext(null);
-			}
+			resp.getNodo(hastaDonde).setNext(null);
 			return resp;
 		}
 		
+	}
+
+	@Override
+	public ILista<T> subList(int posi, int numElementos) 
+	{
+		if(numElementos<1 || posi<1)
+		{
+			System.out.println("Alguno de los parametros esta mal");
+			return null;
+		}
+		else
+		{
+			NodoListaEncadenada<T> primero = getNodo(posi);
+			ListaEncadenada<T> resp= new ListaEncadenada<T>(primero);
+			int hastaDonde = numElementos;
+			if(numElementos>size()-posi)
+			{
+				hastaDonde = size();
+			}
+			resp.getNodo(hastaDonde).setNext(null);
+			return resp;
+		}
 	}
 
 
