@@ -59,10 +59,38 @@ public class Ordenamiento<T extends Comparable<T>>
 		}
 	}
 	
-	
 	public void ordenarQuickSort(ILista<T> lista, Comparator<T> criterio, boolean ascendente)
 	{
-		
+		sort(lista, criterio, ascendente, 1, lista.size());
+	}
+	
+	private void sort(ILista<T> lista, Comparator<T> criterio, boolean ascendente, int lo, int hi)
+	{
+		if(lo>=hi)
+		{
+			return;
+		}
+		int pivot = partition(lista,criterio,ascendente,lo,hi);
+		sort(lista, criterio, ascendente, lo, pivot-1);
+		sort(lista, criterio, ascendente, pivot+1, hi);
+	}
+	
+	private int partition(ILista<T> lista, Comparator<T> criterio, boolean ascendente, int lo, int hi)
+	{
+		int follower = lo;
+		int leader = lo;
+		while(leader<hi)
+		{
+			int comparacion = (ascendente?1:-1)*criterio.compare(lista.getElement(leader), lista.getElement(hi));
+			if(comparacion<0)
+			{
+				lista.exchange(follower, leader);
+				follower++;
+			}
+			leader++;
+		}
+		lista.exchange(follower, hi);
+		return follower;
 	}
 	
 	public void ordenarMerge(ILista<T> lista, Comparator<T> criterio, boolean ascendente)
