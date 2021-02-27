@@ -95,6 +95,56 @@ public class Ordenamiento<T extends Comparable<T>>
 	
 	public void ordenarMerge(ILista<T> lista, Comparator<T> criterio, boolean ascendente)
 	{
-		
+		int size = lista.size();
+		if(size>1)
+		{
+			int mid = size/2;
+			
+			ILista<T> leftList = lista.subList(1, mid);
+			ILista<T> rightList = lista.subList(mid+1, size-mid);
+			
+			ordenarMerge(leftList, criterio, ascendente);
+			ordenarMerge(rightList, criterio, ascendente);
+			
+			int i = 1;
+			int j = 1;
+			int k = 1;
+			
+			int leftElements = leftList.size();
+			int rightElements = rightList.size();
+			
+			while(i<=leftElements && j<=rightElements)
+			{
+				T elemi = leftList.getElement(i);
+				T elemj = rightList.getElement(j);
+				
+				int comparacion = (ascendente?1:-1)*criterio.compare(elemi, elemj);
+				if(comparacion<0)
+				{
+					lista.changeInfo(k, elemi);	
+					i++;
+				}
+				else
+				{
+					lista.changeInfo(k, elemj);
+					j++;
+				}
+				k++;
+			}
+			
+			while(i<=leftElements)
+			{
+				lista.changeInfo(k, leftList.getElement(i));
+				i++;
+				k++;
+			}
+			
+			while(j<=rightElements)
+			{
+				lista.changeInfo(k, rightList.getElement(j));
+				j++;
+				k++;
+			}
+		}
 	}
 }
