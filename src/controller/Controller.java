@@ -3,9 +3,11 @@ package controller;
 import java.util.Comparator;
 import java.util.Scanner;
 
+import model.data_structures.ILista;
 import model.data_structures.YoutubeVideo;
 import model.logic.Cronometro;
 import model.logic.Modelo;
+import utils.Ordenamiento;
 import view.View;
 
 public class Controller {
@@ -32,6 +34,8 @@ public class Controller {
 		boolean fin = false;
 		String dato = "";
 		String respuesta = "";
+		Ordenamiento<YoutubeVideo> ordenador = new Ordenamiento<YoutubeVideo>();
+		Comparator<YoutubeVideo> criterio = new YoutubeVideo.ComparadorXLikes();
 
 		while( !fin ){
 			view.printMenu();
@@ -41,9 +45,9 @@ public class Controller {
 			{
 
 			case 1:
-				view.printMessage("Realiza carga de datos de los videos a una lista encadenada\n");
-				modelo = new Modelo(1);
-				view.printMessage("El total de videos cargado en la lista encadenda es: " +modelo.darTamano());
+				view.printMessage("Realiza carga de datos de los videos a un arreglo dinamico\n");
+				modelo = new Modelo(2);
+				view.printMessage("El total de videos cargado en el arreglo dinamico es: " +modelo.darTamano());
 
 				view.printMenu2();
 				int opcion1 = lector.nextInt();
@@ -81,7 +85,7 @@ public class Controller {
 				{
 				case 1:
 					long start_time = System.currentTimeMillis();
-//					modelo.organizar ;
+					ordenador.ordenarInsecion((ILista<YoutubeVideo>) modelo, criterio, true);
 					long stop_time = System.currentTimeMillis();
 					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento Insertion sort es: "+ (start_time-stop_time));
 					view.printMessage("Informacion basica de los primeros 10 videos:");
@@ -103,7 +107,7 @@ public class Controller {
 					break;
 				case 2:
 					long start_time2 = System.currentTimeMillis();
-//					modelo.organizar ;
+					ordenador.ordenarShell((ILista<YoutubeVideo>) modelo, criterio, true);
 					long stop_time2 = System.currentTimeMillis();
 					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Shell sort: "+ (start_time2-stop_time2));
 					view.printMessage("Informacion basica de los primeros 10 videos:");
@@ -125,7 +129,7 @@ public class Controller {
 					break;
 				case 3:
 					long start_time3 = System.currentTimeMillis();
-//					modelo.organizar ;
+					ordenador.ordenarMerge((ILista<YoutubeVideo>) modelo, criterio, true);
 					long stop_time3 = System.currentTimeMillis();
 					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Merge sort: "+ (start_time3-stop_time3));
 					view.printMessage("Informacion basica de los primeros 10 videos:");
@@ -147,7 +151,7 @@ public class Controller {
 					break;
 				case 4:
 					long start_time4 = System.currentTimeMillis();
-//					modelo.organizar ;
+					ordenador.ordenarQuickSort((ILista<YoutubeVideo>) modelo, criterio, true);
 					long stop_time4 = System.currentTimeMillis();
 					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Quick sort: "+ (start_time4-stop_time4));
 					view.printMessage("Informacion basica de los primeros 10 videos:");

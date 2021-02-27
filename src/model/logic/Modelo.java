@@ -24,7 +24,7 @@ import model.data_structures.YoutubeVideo;
  * Definicion del modelo del mundo
  *
  */
-public class Modelo  
+public class Modelo 
 {
 
 	/**
