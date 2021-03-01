@@ -108,7 +108,7 @@ public class Modelo
 	
 	public void cargarDatos() throws Exception
 	{
-		final Reader lector = new InputStreamReader (new FileInputStream(new File("./data/videos-small.csv")),"UTF-8");
+		final Reader lector = new InputStreamReader (new FileInputStream(new File("./data/videos-all.csv")),"UTF-8");
 		final CSVParser parser = new CSVParser(lector, CSVFormat.EXCEL.withFirstRecordAsHeader().withDelimiter(','));
 		
 		
