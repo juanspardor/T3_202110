@@ -236,41 +236,12 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		{
 
 		}
-		else if(pos1-pos2==1)
-		{
-			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getNodo(pos2-1);
-			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getNodo(pos1+1);
-			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getNodo(pos1);
-			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getNodo(pos2);
-			anterior2.setNext(actual1);
-			actual1.setNext(actual2);
-			actual2.setNext(siguiente1);
-
-		}
-		else if(pos1-pos2==-1)
-		{
-			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getNodo(pos1-1);
-			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getNodo(pos2+1);
-			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getNodo(pos1);
-			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getNodo(pos2);
-			anterior1.setNext(actual2);
-			actual2.setNext(actual1);
-			actual1.setNext(siguiente2);
-		}
 		else
 		{
-			NodoListaEncadenada<T> anterior1 = (NodoListaEncadenada<T>) getNodo(pos1-1);
-			NodoListaEncadenada<T> siguiente1 = (NodoListaEncadenada<T>) getNodo(pos1+1);
-			NodoListaEncadenada<T> anterior2 = (NodoListaEncadenada<T>) getNodo(pos2-1);
-			NodoListaEncadenada<T> siguiente2 = (NodoListaEncadenada<T>) getNodo(pos2+1);
-			NodoListaEncadenada<T> actual1 = (NodoListaEncadenada<T>) getNodo(pos1);
-			NodoListaEncadenada<T> actual2 = (NodoListaEncadenada<T>) getNodo(pos2);
-
-			anterior1.setNext(actual2);
-			actual2.setNext(siguiente1);
-
-			anterior2.setNext(actual1);
-			actual1.setNext(siguiente2);
+			T datoPos1 = getNodo(pos1).getInfo();
+			T datoPos2 = getNodo(pos2).getInfo();
+			getNodo(pos1).cambiarInfo(datoPos2);
+			getNodo(pos2).cambiarInfo(datoPos1);
 		}
 	}
 
