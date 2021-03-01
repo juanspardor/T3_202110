@@ -25,7 +25,7 @@ public class Controller {
 	public Controller ()
 	{
 		view = new View();
-		modelo = new Modelo(0);
+		modelo = new Modelo();
 	}
 
 	public void run() 
