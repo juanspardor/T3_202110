@@ -46,7 +46,7 @@ public class Controller {
 
 			case 1:
 				view.printMessage("Realiza carga de datos de los videos a una lista encadenada\n");
-				modelo = new Modelo(2);
+				modelo = new Modelo(1);
 				view.printMessage("El total de videos cargado en la lista encadenada es: " +modelo.darTamano());
 
 				view.printMenu2();
