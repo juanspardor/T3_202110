@@ -97,6 +97,14 @@ public class Modelo
 		datos.addLast(dato);
 	}
 
+	/**
+	 * Retorna la suublista con la cantidad de datos entregada en el parametro
+	 * @param dato
+	 */
+	public ILista<YoutubeVideo> sublista(int dato)
+	{
+		return datos.sublista(dato);
+	}
 	
 	public void cargarDatos() throws Exception
 	{

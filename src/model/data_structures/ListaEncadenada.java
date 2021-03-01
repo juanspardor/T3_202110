@@ -296,12 +296,14 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 	
 	public ILista<T> sublista(int numElementos)
 	{
+		ILista<T> respuesta=null;
 		if(numElementos<1)
 		{
 			System.out.println("El numero no puede ser menor que 1");
-			return null;
+			respuesta= null;
 		}
-		else
+		
+		else 
 		{
 			ListaEncadenada<T> resp = new ListaEncadenada<T>(first);
 			int hastaDonde = numElementos;
@@ -310,20 +312,22 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 				hastaDonde = size();
 			}
 			resp.getNodo(hastaDonde).setNext(null);
-			return resp;
+			respuesta= resp;
 		}
-		
+		return respuesta;
 	}
 
 	@Override
 	public ILista<T> subList(int posi, int numElementos) 
 	{
+		ILista<T> respuesta=null;
+		
 		if(numElementos<1 || posi<1)
 		{
 			System.out.println("Alguno de los parametros esta mal");
 			return null;
 		}
-		else
+		else if(posi<size())
 		{
 			NodoListaEncadenada<T> primero = getNodo(posi);
 			ListaEncadenada<T> resp= new ListaEncadenada<T>(primero);
@@ -333,8 +337,9 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 				hastaDonde = size();
 			}
 			resp.getNodo(hastaDonde).setNext(null);
-			return resp;
+			respuesta= resp;
 		}
+		return respuesta;
 	}
 
 

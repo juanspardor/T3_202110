@@ -93,7 +93,7 @@ public interface ILista<T extends Comparable<T>>
 	public void changeInfo(int pos, T elemento);
 	
 	/**
-	 * 
+	 * Retorna una sublista con los elementos desde el primero hasta la cantidad solicitada.
 	 * @param numElementos
 	 * @return
 	 */

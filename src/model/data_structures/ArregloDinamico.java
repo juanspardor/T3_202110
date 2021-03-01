@@ -402,6 +402,7 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 	
 	public ILista<T> sublista(int numElementos)
 	{
+		ILista<T> respuesta=null;
 		if(numElementos<1)
 		{
 			System.out.println("El numero no puede ser negativo");
@@ -421,8 +422,9 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 					resp.addLast(elementos[i]);;
 				}
 			}
-			return resp;
+			respuesta= resp;
 		}
+		return respuesta;
 	}
 	
 	
@@ -432,12 +434,13 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 	@Override
 	public ILista<T> subList(int posi, int numElementos) 
 	{
+		ILista<T> respuesta=null;
 		if(numElementos <1 || posi<1)
 		{
 			System.out.println("Uno de los parametros esta mal");
-			return null;
+			respuesta= null;
 		}
-		else
+		else if(posi<=tamanoAct)
 		{
 			ArregloDinamico<T> resp = new ArregloDinamico<T>(numElementos);
 			int hastaDonde=numElementos;
@@ -449,8 +452,9 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 			{
 				resp.addLast(elementos[i]);
 			}
-			return resp;
+			respuesta= resp;
 		}
+		return respuesta;
 	}
 
 
