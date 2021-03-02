@@ -24,6 +24,7 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 		} 
 		else {
 			nuevo.setNext(first);
+			first = nuevo;
 		}
 	}
 
@@ -32,10 +33,10 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 	{
 		NodoListaEncadenada<T> nuevo= new NodoListaEncadenada<T> (elemento);
 
-		if(first==null){
+		if(first==null)
+		{
 			first= nuevo;
-
-				} 
+		} 
 
 		else 
 		{
@@ -250,7 +251,7 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 	{
 		NodoListaEncadenada<T> actual = first;
 
-		if (pos<size() && pos>0)
+		if (pos<=size() && pos>0)
 		{
 			int i=1;
 			while(i<pos)
@@ -291,6 +292,7 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 	@Override
 	public ILista<T> subList(int posi, int numElementos) 
 	{
+		System.out.println(posi);
 		ILista<T> respuesta=null;
 		
 		if(numElementos<1 || posi<1)
@@ -298,16 +300,15 @@ public class ListaEncadenada < T extends Comparable <T>> implements ILista<T>
 			System.out.println("Alguno de los parametros esta mal");
 			return null;
 		}
-		else if(posi<size())
+		else if(posi<=size())
 		{
-			NodoListaEncadenada<T> primero = getNodo(posi);
-			ListaEncadenada<T> resp= new ListaEncadenada<T>(primero);
-			int hastaDonde = numElementos;
-			if(numElementos>size()-posi)
+			NodoListaEncadenada<T> actual = getNodo(posi);
+			ListaEncadenada<T> resp= new ListaEncadenada<T>(null);
+			for(int i = 1; i<=numElementos && actual!=null;i++)
 			{
-				hastaDonde = size();
+				resp.addLast(actual.getInfo());
+				actual=actual.getNext();
 			}
-			resp.getNodo(hastaDonde).setNext(null);
 			respuesta= resp;
 		}
 		return respuesta;

@@ -102,7 +102,7 @@ public class Ordenamiento<T extends Comparable<T>>
 			int mid = size/2;
 			
 			ILista<T> leftList = lista.subList(1, mid);
-			ILista<T> rightList = lista.subList(mid+1, size);
+			ILista<T> rightList = lista.subList(mid+1, size-mid);
 			
 			ordenarMerge(leftList, criterio, ascendente);
 			ordenarMerge(rightList, criterio, ascendente);
@@ -120,7 +120,7 @@ public class Ordenamiento<T extends Comparable<T>>
 				T elemj = rightList.getElement(j);
 				
 				int comparacion = (ascendente?1:-1)*criterio.compare(elemi, elemj);
-				if(comparacion<0)
+				if(comparacion<=0)
 				{
 					lista.changeInfo(k, elemi);	
 					i++;

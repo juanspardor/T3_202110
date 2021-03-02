@@ -56,7 +56,7 @@ public class Controller {
 				{
 					view.printMessage("Se obtiene la muestra de videos de la lista cargada del tamaño de :"+ opcion2);
 					sub = modelo.sublista(opcion2);
-					int respuesta2= modelo.darTamano();
+					int respuesta2= sub.size();
 					if(opcion2<sub.size())
 					{
 						respuesta2=opcion2;
@@ -141,11 +141,12 @@ public class Controller {
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
 					int g=sub.size();
-
-					while (g>(sub.size()-10)&&sub.getElement(g)!=null)
+					if(sub.size()>=20) {g=sub.size()-10;}
+					else {g=11;}
+		
+					for(int y =g;y<=sub.size();y++)
 					{
-						view.printMessage("Titulo: "+ sub.getElement(g).darTitulo() +". Numero Likes: "+sub.getElement(g).darLikes());
-						g--;
+						view.printMessage("Titulo: "+ sub.getElement(y).darTitulo() +". Numero Likes: "+sub.getElement(y).darLikes());
 					}
 
 					break;
