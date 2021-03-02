@@ -36,6 +36,7 @@ public class Controller {
 		String respuesta = "";
 		Ordenamiento<YoutubeVideo> ordenador = new Ordenamiento<YoutubeVideo>();
 		Comparator<YoutubeVideo> criterio = new YoutubeVideo.ComparadorXLikes();
+		ILista<YoutubeVideo> sub = null;
 
 		while( !fin ){
 			view.printMenu();
@@ -54,9 +55,9 @@ public class Controller {
 				if(opcion2>0)
 				{
 					view.printMessage("Se obtiene la muestra de videos de la lista cargada del tamaño de :"+ opcion2);
-					modelo.sublista(opcion2);
+					sub = modelo.sublista(opcion2);
 					int respuesta2= modelo.darTamano();
-					if(opcion2<modelo.darTamano())
+					if(opcion2<sub.size())
 					{
 						respuesta2=opcion2;
 					}
@@ -84,91 +85,66 @@ public class Controller {
 				{
 				case 1:
 					long start_time = System.currentTimeMillis();
-					long stop_time = start_time+600000;
-					long elapsed_time= 0;
-					Comparator <YoutubeVideo> comparadorXlikes =new YoutubeVideo.ComparadorXLikes();
-					Ordenamiento <YoutubeVideo> algsOrdenamientoVideos =new Ordenamiento<YoutubeVideo>();
-					while (System.currentTimeMillis()<stop_time)
-					{
-						algsOrdenamientoVideos.ordenarInsecion((ILista<YoutubeVideo>) modelo, comparadorXlikes, true);
-						stop_time = System.currentTimeMillis();
-					}
-					elapsed_time=start_time-stop_time;
-
-
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento Insertion sort es: "+ (elapsed_time));
+					ordenador.ordenarInsecion(sub, criterio, true);
+					long stop_time = System.currentTimeMillis();
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento Insertion sort es: "+ (start_time-stop_time)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int i=1;
-					while (i<=10&& i<=modelo.darTamano())
+					while (i<=10&& i<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(i).darTitulo() +". Numero de likes: "+String.valueOf(modelo.getElement(i).darLikes()));
+						view.printMessage("Titulo: "+ sub.getElement(i).darTitulo() +". Numero Likes: "+sub.getElement(i).darLikes());
 						i++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int j=modelo.darTamano();
+					int j=sub.size();
 
-					while (j>(modelo.darTamano()-10)&&modelo.getElement(j)!=null)
+					while (j>(sub.size()-10)&&sub.getElement(j)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(j).darTitulo()+ ". Numero de likes: "+String.valueOf(modelo.getElement(j).darLikes()));
+						view.printMessage("Titulo: "+ sub.getElement(j).darTitulo() +". Numero Likes: "+sub.getElement(j).darLikes());
 						j--;
 					}
 
 					break;
 				case 2:
 					long start_time2 = System.currentTimeMillis();
-					long stop_time2 = start_time2+600000;
-					long elapsed_time2= 0;
-					while (System.currentTimeMillis()<stop_time2)
-					{
-						ordenador.ordenarShell((ILista<YoutubeVideo>) modelo, criterio, true);
-						stop_time2 = System.currentTimeMillis();
-					}
-					elapsed_time2=start_time2-stop_time2;
-
-
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Shell sort: "+ (elapsed_time2));
+					ordenador.ordenarShell(sub, criterio, true);
+					long stop_time2 = System.currentTimeMillis();
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Shell sort: "+ (start_time2-stop_time2)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int k=1;
-					while (k<=10&& k<=modelo.darTamano())
+					while (k<=10&& k<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(k).darTitulo() +". Canal: "+modelo.getElement(k).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(k).darTitulo() +". Numero Likes: "+sub.getElement(k).darLikes());
 						k++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int h=modelo.darTamano();
+					int l=sub.size();
 
-					while (h>(modelo.darTamano()-10)&&modelo.getElement(h)!=null)
+					while (l>(sub.size()-10)&&sub.getElement(l)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(h).darTitulo()+ ". Canal: "+modelo.getElement(h).darTrending());
-						h--;
+						view.printMessage("Titulo: "+ sub.getElement(l).darTitulo() +". Numero Likes: "+sub.getElement(l).darLikes());
+						l--;
 					}
 
 					break;
 				case 3:
 					long start_time3 = System.currentTimeMillis();
-					long stop_time3 = start_time3+600000;
-					long elapsed_time3= 0;
-					while (System.currentTimeMillis()<stop_time3)
-					{
-						ordenador.ordenarMerge((ILista<YoutubeVideo>) modelo, criterio, true);
-						stop_time3 = System.currentTimeMillis();
-					}
-					elapsed_time3=start_time3-stop_time3;
-
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Merge sort: "+ (elapsed_time3));
+					ordenador.ordenarMerge(sub, criterio, true);
+					long stop_time3 = System.currentTimeMillis();
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Merge sort: "+ (start_time3-stop_time3)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int f=1;
-					while (f<=10&& f<=modelo.darTamano())
+					while (f<=10&& f<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(f).darTitulo() +". Canal: "+modelo.getElement(f).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(f).darTitulo() +". Numero Likes: "+sub.getElement(f).darLikes());
 						f++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int g=modelo.darTamano();
+					int g=sub.size();
 
-					while (g>(modelo.darTamano()-10)&&modelo.getElement(g)!=null)
+					while (g>(sub.size()-10)&&sub.getElement(g)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(g).darTitulo()+ ". Canal: "+modelo.getElement(g).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(g).darTitulo() +". Numero Likes: "+sub.getElement(g).darLikes());
 						g--;
 					}
 
@@ -176,22 +152,22 @@ public class Controller {
 
 				case 4:
 					long start_time4 = System.currentTimeMillis();
-					ordenador.ordenarQuickSort((ILista<YoutubeVideo>) modelo, criterio, true);
+					ordenador.ordenarQuickSort(sub, criterio, true);
 					long stop_time4 = System.currentTimeMillis();
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Quick sort: "+ (start_time4-stop_time4));
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Quick sort: "+ (start_time4-stop_time4)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int m=1;
-					while (m<=10&& m<=modelo.darTamano())
+					while (m<=10&& m<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(m).darTitulo() +". Canal: "+modelo.getElement(m).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(m).darTitulo() +". Numero Likes: "+sub.getElement(m).darLikes());
 						m++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int n=modelo.darTamano();
+					int n=sub.size();
 
-					while (n>(modelo.darTamano()-10)&&modelo.getElement(n)!=null)
+					while (n>(sub.size()-10)&&sub.getElement(n)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(n).darTitulo()+ ". Canal: "+modelo.getElement(n).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(n).darTitulo() +". Numero Likes: "+sub.getElement(n).darLikes());
 						n--;
 					}
 
@@ -205,6 +181,7 @@ public class Controller {
 				default: 
 					view.printMessage("--------- \n Opcion Invalida !! \n---------");
 					break;
+
 
 				}
 
@@ -220,9 +197,9 @@ public class Controller {
 				if(opcion_2>0)
 				{
 					view.printMessage("Se obtiene la muestra de videos de la lista cargada del tamaño"+ opcion_2);
-					modelo.sublista(opcion_2);
+					sub = modelo.sublista(opcion_2);
 					int respuesta2= modelo.darTamano();
-					if(opcion_2<modelo.darTamano())
+					if(opcion_2<sub.size())
 					{
 						respuesta2=opcion_2;
 					}
@@ -251,66 +228,66 @@ public class Controller {
 				{
 				case 1:
 					long start_time = System.currentTimeMillis();
-					ordenador.ordenarInsecion((ILista<YoutubeVideo>) modelo, criterio, true);
+					ordenador.ordenarInsecion(sub, criterio, true);
 					long stop_time = System.currentTimeMillis();
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento Insertion sort es: "+ (start_time-stop_time));
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento Insertion sort es: "+ (start_time-stop_time)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int i=1;
-					while (i<=10&& i<=modelo.darTamano())
+					while (i<=10&& i<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(i).darTitulo() +". Canal: "+modelo.getElement(i).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(i).darTitulo() +". Numero Likes: "+sub.getElement(i).darLikes());
 						i++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int j=modelo.darTamano();
+					int j=sub.size();
 
-					while (j>(modelo.darTamano()-10)&&modelo.getElement(j)!=null)
+					while (j>(sub.size()-10)&&sub.getElement(j)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(j).darTitulo()+ ". Canal: "+modelo.getElement(j).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(j).darTitulo() +". Numero Likes: "+sub.getElement(j).darLikes());
 						j--;
 					}
 
 					break;
 				case 2:
 					long start_time2 = System.currentTimeMillis();
-					ordenador.ordenarShell((ILista<YoutubeVideo>) modelo, criterio, true);
+					ordenador.ordenarShell(sub, criterio, true);
 					long stop_time2 = System.currentTimeMillis();
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Shell sort: "+ (start_time2-stop_time2));
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Shell sort: "+ (start_time2-stop_time2)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int k=1;
-					while (k<=10&& k<=modelo.darTamano())
+					while (k<=10&& k<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(k).darTitulo() +". Canal: "+modelo.getElement(k).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(k).darTitulo() +". Numero Likes: "+sub.getElement(k).darLikes());
 						k++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int h=modelo.darTamano();
+					int l=sub.size();
 
-					while (h>(modelo.darTamano()-10)&&modelo.getElement(h)!=null)
+					while (l>(sub.size()-10)&&sub.getElement(l)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(h).darTitulo()+ ". Canal: "+modelo.getElement(h).darTrending());
-						h--;
+						view.printMessage("Titulo: "+ sub.getElement(l).darTitulo() +". Numero Likes: "+sub.getElement(l).darLikes());
+						l--;
 					}
 
 					break;
 				case 3:
 					long start_time3 = System.currentTimeMillis();
-					ordenador.ordenarMerge((ILista<YoutubeVideo>) modelo, criterio, true);
+					ordenador.ordenarMerge(sub, criterio, true);
 					long stop_time3 = System.currentTimeMillis();
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Merge sort: "+ (start_time3-stop_time3));
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Merge sort: "+ (start_time3-stop_time3)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int f=1;
-					while (f<=10&& f<=modelo.darTamano())
+					while (f<=10&& f<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(f).darTitulo() +". Canal: "+modelo.getElement(f).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(f).darTitulo() +". Numero Likes: "+sub.getElement(f).darLikes());
 						f++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int g=modelo.darTamano();
+					int g=sub.size();
 
-					while (g>(modelo.darTamano()-10)&&modelo.getElement(g)!=null)
+					while (g>(sub.size()-10)&&sub.getElement(g)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(g).darTitulo()+ ". Canal: "+modelo.getElement(g).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(g).darTitulo() +". Numero Likes: "+sub.getElement(g).darLikes());
 						g--;
 					}
 
@@ -318,22 +295,22 @@ public class Controller {
 
 				case 4:
 					long start_time4 = System.currentTimeMillis();
-					ordenador.ordenarQuickSort((ILista<YoutubeVideo>) modelo, criterio, true);
+					ordenador.ordenarQuickSort(sub, criterio, true);
 					long stop_time4 = System.currentTimeMillis();
-					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Quick sort: "+ (start_time4-stop_time4));
+					view.printMessage("Tiempo que tomo el proceso de carga en milisegundos del algoritmo de ordenamiento es Quick sort: "+ (start_time4-stop_time4)*-1);
 					view.printMessage("Informacion basica de los primeros 10 videos:");
 					int m=1;
-					while (m<=10&& m<=modelo.darTamano())
+					while (m<=10&& m<=sub.size())
 					{	
-						view.printMessage("Titulo: "+ modelo.getElement(m).darTitulo() +". Canal: "+modelo.getElement(m).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(m).darTitulo() +". Numero Likes: "+sub.getElement(m).darLikes());
 						m++;
 					}
 					view.printMessage("Informacion basica de los ultimos 10 videos:");
-					int n=modelo.darTamano();
+					int n=sub.size();
 
-					while (n>(modelo.darTamano()-10)&&modelo.getElement(n)!=null)
+					while (n>(sub.size()-10)&&sub.getElement(n)!=null)
 					{
-						view.printMessage("Titulo: "+modelo.getElement(n).darTitulo()+ ". Canal: "+modelo.getElement(n).darTrending());
+						view.printMessage("Titulo: "+ sub.getElement(n).darTitulo() +". Numero Likes: "+sub.getElement(n).darLikes());
 						n--;
 					}
 

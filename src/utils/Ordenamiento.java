@@ -15,7 +15,7 @@ public class Ordenamiento<T extends Comparable<T>>
 			boolean enPosicion = false;
 			for(int j = i; j>1 && !enPosicion; j--)
 			{
-				int comparacion = (ascendente?1:-1)*criterio.compare(lista.getElement(j), lista.getElement(i));
+				int comparacion = (ascendente?1:-1)*criterio.compare(lista.getElement(j), lista.getElement(j-1));
 				if(comparacion<0)
 				{
 					lista.exchange(j, j-1);
@@ -33,9 +33,9 @@ public class Ordenamiento<T extends Comparable<T>>
 		int n = lista.size();
 		int h = 1;
 		
-		while(h<n/3)
+		while(h<(n/3))
 		{
-			h=3*1+1;
+			h=3*h+1;
 		}
 		
 		while(h>=1)
@@ -43,9 +43,9 @@ public class Ordenamiento<T extends Comparable<T>>
 			for(int i = h+1;i<n;i++)
 			{
 				boolean enPosicion = false;
-				for(int j = i;j>h && !enPosicion; j++)
+				for(int j = i;j>h && !enPosicion; j-=h)
 				{
-					int comparacion = (ascendente?1:-1)* criterio.compare(lista.getElement(j), lista.getElement(i));
+					int comparacion = (ascendente?1:-1)* criterio.compare(lista.getElement(j), lista.getElement(j-h));
 					if(comparacion<0)
 					{
 						lista.exchange(j, j-h);
@@ -76,7 +76,7 @@ public class Ordenamiento<T extends Comparable<T>>
 		sort(lista, criterio, ascendente, pivot+1, hi);
 	}
 	
-	private int partition(ILista<T> lista, Comparator<T> criterio, boolean ascendente, int lo, int hi)
+	private final int partition(ILista<T> lista, Comparator<T> criterio, boolean ascendente, int lo, int hi)
 	{
 		int follower = lo;
 		int leader = lo;
@@ -102,7 +102,7 @@ public class Ordenamiento<T extends Comparable<T>>
 			int mid = size/2;
 			
 			ILista<T> leftList = lista.subList(1, mid);
-			ILista<T> rightList = lista.subList(mid+1, size-mid);
+			ILista<T> rightList = lista.subList(mid+1, size);
 			
 			ordenarMerge(leftList, criterio, ascendente);
 			ordenarMerge(rightList, criterio, ascendente);
