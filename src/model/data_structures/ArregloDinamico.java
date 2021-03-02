@@ -441,10 +441,13 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 		else 
 		{
 			ArregloDinamico<T> resp = new ArregloDinamico<T>(numElementos);
+			int total=0;
+	
 			
-			for(int i = posi-1;i<=numElementos && i<tamanoAct;i++)
+			for(int i = posi-1;(tamanoAct-i)<=0 && total<=numElementos&& i<tamanoAct;i++)
 			{
 				resp.addLast(elementos[i]);
+				total++;
 			}
 			respuesta= resp;
 		}
