@@ -399,33 +399,28 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 		}
 
 	}
-	
+
 	public ILista<T> sublista(int numElementos)
 	{
-		if(numElementos<1)
+
+
+		ArregloDinamico<T> resp = new ArregloDinamico<T>(numElementos);
+		if(numElementos>=tamanoAct)
 		{
-			System.out.println("El numero no puede ser negativo");
-			return null;
+			resp = this;
 		}
 		else
 		{
-			ArregloDinamico<T> resp = new ArregloDinamico<T>(numElementos);
-			if(numElementos>=tamanoAct)
+			for(int i = 0; i<numElementos;i++)
 			{
-				resp = this;
+				resp.addLast(elementos[i]);;
 			}
-			else
-			{
-				for(int i = 0; i<numElementos;i++)
-				{
-					resp.addLast(elementos[i]);;
-				}
-			}
-			return resp;
 		}
+		return resp;
+
 	}
-	
-	
+
+
 
 
 
@@ -441,12 +436,11 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 		else 
 		{
 			ArregloDinamico<T> resp = new ArregloDinamico<T>(numElementos);
-			int total=0;
-	
-			
-			for(int i = posi-1;(tamanoAct-i)<=0 && total<=numElementos&& i<tamanoAct;i++)
+			int total=posi-1;
+
+			for(int i = 0;(tamanoAct-i)<0 && i<numElementos;i++)
 			{
-				resp.addLast(elementos[i]);
+				resp.addLast(elementos[total]);
 				total++;
 			}
 			respuesta= resp;
